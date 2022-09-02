@@ -68,7 +68,7 @@ enum {
 };
 
 // Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_LPRN_RPRN] = ACTION_TAP_DANCE_DOUBLE(FI_LPRN, FI_RPRN),
     [TD_LCBR_RCBR] = ACTION_TAP_DANCE_DOUBLE(FI_LCBR, FI_RCBR),
     [TD_LBRC_RBRC] = ACTION_TAP_DANCE_DOUBLE(FI_LBRC, FI_RBRC),
@@ -198,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |UC_M_MA |      |      |      |      |      |                              | DAS  | PLVR | QWRT | F11  | F12  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |UC_M_LN |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
+ * |UC_M_LN |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      | QK_BOOT|
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -207,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       UC_M_WC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,    KC_F8,   KC_F9,   KC_F10,  _______,
       UC_M_MA, _______, _______, _______, _______, _______,                                     DAS,     PLVR,     QWRT,    KC_F11,  KC_F12,  _______,
-      UC_M_LN, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______,
+      UC_M_LN, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, QK_BOOT,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______
     ),
 // /*
@@ -237,7 +237,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 
-bool process_record_user(uintptr_t keycode, keyrecord_t *record)
+bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
     bool is_mac = get_unicode_input_mode() == UC_MAC;
 
@@ -346,7 +346,7 @@ void matrix_scan_user(void) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 	return OLED_ROTATION_180;
 }
-/*
+
 static void render_jesterKing_logo(void) {
     static const char PROGMEM jesterKing_logo[] = {
         // 'kyria_jk_etsu_inv', 128x64px
@@ -417,7 +417,7 @@ static void render_jesterKing_logo(void) {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     };
     oled_write_raw_P(jesterKing_logo, sizeof(jesterKing_logo));
-}*/
+}
 
 /*static void render_qmk_logo(void) {
   static const char PROGMEM qmk_logo[] = {
@@ -486,11 +486,11 @@ static void render_status(void) {
 
 void oled_task_user(void) {
     render_status();
-    /*if (is_keyboard_master()) {
+    if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         render_jesterKing_logo();
-    }*/
+    }
 }
 #endif
 
@@ -544,16 +544,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 void keyboard_post_init_user(void) {
-    oled_set_brightness(1);
-    //rgblight_mode_noeeprom(1);
-    //rgblight_set_speed_noeeprom(100);
-    //rgblight_sethsv_noeeprom(21, 250, 150);
-    //rgblight_sethsv_noeeprom(100, 250, 150);
-    //rgblight_sethsv_at(100, 250, 150, 1);
-    //rgblight_sethsv_at(100, 250, 150, 2);
-    LED_TYPE led;
-    sethsv(HSV_WHITE, &led);
-    rgblight_setrgb_at(led.r, led.g, led.b, 0);
+    //oled_set_brightness(1);
+    rgblight_mode_noeeprom(1);
+    rgblight_set_speed_noeeprom(100);
+    rgblight_sethsv_noeeprom(21, 250, 150);
+    rgblight_sethsv_noeeprom(100, 250, 150);
+    rgblight_sethsv_at(100, 250, 150, 1);
+    rgblight_sethsv_at(100, 250, 150, 2);
+    //LED_TYPE led;
+    //sethsv(HSV_WHITE, &led);
+    //rgblight_setrgb_at(led.r, led.g, led.b, 0);
 }
 
 void suspend_power_down_user(void) {
