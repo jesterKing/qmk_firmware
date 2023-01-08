@@ -484,14 +484,11 @@ static void render_status(void) {
 }
 
 bool oled_task_user(void) {
-    if(is_keyboard_left())
-    {
-        render_jesterKing_logo();
-        oled_scroll_left();
-    }
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
-        oled_scroll_right();
+    }
+    else {
+        render_jesterKing_logo();
     }
     return false;
 }
