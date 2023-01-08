@@ -79,7 +79,7 @@
     {
       "f": 3
     },
-    "MWUp\n£\n\n\n\n\nqz"
+    "\n£\n\n\nf11\n\nqz"
   ],
   [
     {
@@ -93,7 +93,7 @@
       "x": 9,
       "f": 3
     },
-    "Up\n5\n\n\n\n\ni"
+    "Up\n5\n\n\nMUp\n\ni"
   ],
   [
     {
@@ -115,13 +115,13 @@
       "f": 3,
       "n": true
     },
-    "Left\n4\n\n\n\n\na",
+    "Left\n4\n\n\nMLft\n\na",
     {
       "x": 1,
       "c": "#abc5db",
       "f": 3
     },
-    "Right\n6\n\n\nf11\n\no"
+    "Right\n6\n\n\nMRgt\n\no"
   ],
   [
     {
@@ -135,7 +135,7 @@
       "x": 5,
       "f": 3
     },
-    "MUp\n()\n\n\n\n\ng"
+    "PgUp\n()\n\n\nMwUp\n\ng"
   ],
   [
     {
@@ -152,11 +152,11 @@
       "x": 13,
       "f": 3
     },
-    "\n+-\n\n\nf12\n\ne",
+    "\n+-\n\n\n\n\ne",
     {
       "f": 3
     },
-    "MMB\n/*\n\n\n\n\nc"
+    "\n/*\n\n\nf12\n\nc"
   ],
   [
     {
@@ -170,7 +170,7 @@
       "x": 9,
       "f": 3
     },
-    "Dwn\n2\n\n\n\n\n, ;"
+    "Dwn\n2\n\n\nMDn\n\n, ;"
   ],
   [
     {
@@ -190,13 +190,13 @@
       "x": 7,
       "f": 3
     },
-    "MLeft\n1\n\n\n\n\nä",
+    "Home\n1\n\n\nLMB\n\nä",
     {
       "x": 1,
       "c": "#abc5db",
       "f": 3
     },
-    "MRght\n3\n\n\n\n\n. :"
+    "End\n3\n\n\nRMB\n\n. :"
   ],
   [
     {
@@ -210,7 +210,7 @@
       "x": 5,
       "f": 3
     },
-    "MDn\n{}\n\n\n\n\nö"
+    "PgDn\n{}\n\n\nMwDn\n\nö"
   ],
   [
     {
@@ -231,7 +231,7 @@
     {
       "f": 3
     },
-    "MWDn\n𝜋\n\n\n\n\n*"
+    "\n𝜋\n\n\nBoot\n\n*"
   ],
   [
     {
@@ -267,7 +267,7 @@
       "a": 5,
       "f": 3
     },
-    "\nBksp\n\n\n\n\nENTER"
+    "\nBksp\n\n\nMMB\n\nENTER"
   ],
   [
     {
