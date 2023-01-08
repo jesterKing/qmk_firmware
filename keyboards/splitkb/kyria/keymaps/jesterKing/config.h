@@ -16,8 +16,6 @@
 
 #pragma once
 
-#define EE_HANDS
-
 // The Leader key allows to flexibly assign macros to key sequences.
 #define LEADER_PER_KEY_TIMING
 #define LEADER_NO_TIMEOUT
@@ -25,23 +23,29 @@
 
 #define TAPPING_TERM 200
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
   #define OLED_DISPLAY_128X64
-  #define OLED_TIMEOUT 5000
+  #define OLED_TIMEOUT 0
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-  //#define RGBLIGHT_ANIMATIONS enabling all animations uses 2900 more bytes
-  //#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-  /*#define RGBLIGHT_HUE_STEP 8
+  #define RGBLIGHT_ANIMATIONS //enabling all animations uses 2900 more bytes
+  #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+  #define RGBLIGHT_HUE_STEP 8
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
-  #define RGBLIGHT_LIMIT_VAL 250*/
+  #define RGBLIGHT_LIMIT_VAL 250
   #define RGBLIGHT_LED_MAP {0,1,2,9,8,7,4,3,5,6,19,18,17,10,11,12,15,16,14,13}
 #endif
 
 #define ENCODER_DIRECTION_FLIP
 
-#define RGBLIGHT_DISABLE_KEYCODES // saves 480 bytes
-
 #define UNICODE_SELECTED_MODES UC_WINC, UC_MAC, UC_LINX
+
+#define MOUSE_EXTENDED_REPORT
+#define PIMORONI_TRACKBALL_ADDRESS 0x0A
+#define PIMORONI_TRACKBALL_SCALE 10
+#define POINTING_DEVICE_ROTATION_90
+
+#define WPM_SAMPLE_SECONDS 10
+#define WPM_SAMPLE_PERIODS 100
