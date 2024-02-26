@@ -236,7 +236,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
-    bool is_mac = get_unicode_input_mode() == UC_MAC;
+    bool is_mac = get_unicode_input_mode() == UNICODE_MODE_MACOS;
+    bool is_linx = get_unicode_input_mode() == UNICODE_MODE_LINUX;
 
     switch (keycode)
     {
@@ -297,6 +298,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         if(record->event.pressed && is_mac)
         {
             tap_code16(S(FI_4));
+            return false;
+        }
+        if(record->event.pressed && is_linx)
+        {
+            tap_code16(RALT(FI_E));
             return false;
         }
         return true;
