@@ -337,6 +337,17 @@ void leader_end_user(void) {
     if(leader_sequence_two_keys(FI_M, FI_C)) {
         SEND_STRING("TestMooCow\n");
     }
+    // Git key combos
+    if(leader_sequence_two_keys(FI_G, FI_S)) {
+        SEND_STRING("git status");
+    }
+    if(leader_sequence_two_keys(FI_G, FI_P)) {
+        SEND_STRING("git pull //ff/only");
+    }
+    if(leader_sequence_three_keys(FI_G, FI_S, FI_U)) {
+        SEND_STRING("git submodule update //init //recursive");
+    }
+    // Rhino discourse keycombos
     if(leader_sequence_four_keys(FI_D, FI_R, FI_S, FI_I)) {
         SEND_STRING("Please run the Rhino command ");
         tap_code16(FI_GRV);
