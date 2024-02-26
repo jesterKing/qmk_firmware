@@ -334,12 +334,31 @@ void leader_end_user(void) {
     if(leader_sequence_one_key(FI_R)) { // Initiate recursive search cli: ctrl+r
         tap_code16(LCTL(KC_R));
     }
-    if(leader_sequence_two_keys(FI_M, FI_C)) {
+    // Rhino commands
+    if(leader_sequence_three_keys(FI_R, FI_M, FI_C)) {
         SEND_STRING("TestMooCow\n");
     }
+    if(leader_sequence_three_keys(FI_R, FI_S, FI_I)) {
+        SEND_STRING(SS_LSFT("/") "SystemInfo\n");
+    }
     // Git key combos
+    if(leader_sequence_two_keys(FI_G, FI_D)) {
+        SEND_STRING("git diff\n");
+    }
+    if(leader_sequence_three_keys(FI_G, FI_D, FI_H)) {
+        SEND_STRING("git diff HEAD" SS_RALT("]") " 1\n");
+    }
     if(leader_sequence_two_keys(FI_G, FI_S)) {
-        SEND_STRING("git status");
+        SEND_STRING("git status\n");
+    }
+    if(leader_sequence_two_keys(FI_G, FI_G)) {
+        SEND_STRING("git gui\n");
+    }
+    if(leader_sequence_two_keys(FI_G, FI_K)) {
+        SEND_STRING("gitk\n");
+    }
+    if(leader_sequence_two_keys(FI_G, FI_L)) {
+        SEND_STRING("git log\n");
     }
     if(leader_sequence_two_keys(FI_G, FI_P)) {
         SEND_STRING("git pull //ff/only");
