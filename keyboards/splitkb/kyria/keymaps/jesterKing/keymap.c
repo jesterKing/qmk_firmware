@@ -376,6 +376,15 @@ void leader_end_user(void) {
         tap_code16(KC_SPC);
         SEND_STRING(" and post the result in a reply.");
     }
+    // QMK commands, using K for keyboard instead of Q of QMK
+    // because Q is already a tapdance participant.
+    if(leader_sequence_two_keys(FI_K, FI_C)) {
+        SEND_STRING("qmk compile /kb splitkb");
+        tap_code16(FI_SLSH);
+        SEND_STRING("kyria");
+        tap_code16(FI_SLSH);
+        SEND_STRING("rev3 /km jesterKing\n");
+    }
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -570,6 +579,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 void keyboard_post_init_user(void) {
     rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
+    rgblight_set_speed(30);
     //rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
     //rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
 }
