@@ -361,6 +361,9 @@ void leader_end_user(void) {
     if(leader_sequence_three_keys(FI_G, FI_D, FI_H)) {
         SEND_STRING("git diff HEAD" SS_RALT("]") " 1\n");
     }
+    if(leader_sequence_two_keys(FI_G, FI_F)) {
+        SEND_STRING("git fetch\n");
+    }
     if(leader_sequence_two_keys(FI_G, FI_S)) {
         SEND_STRING("git status\n");
     }
