@@ -341,6 +341,19 @@ void leader_end_user(void) {
     if(leader_sequence_three_keys(FI_R, FI_S, FI_I)) {
         SEND_STRING(SS_LSFT("/") "SystemInfo\n");
     }
+    if(leader_sequence_three_keys(FI_R, FI_R, FI_A)) {
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/")"Raytraced\n");
+    }
+    if(leader_sequence_three_keys(FI_R, FI_R, FI_E)) {
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/")"Rendered\n");
+    }
+    if(leader_sequence_three_keys(FI_R, FI_D, FI_M)) {
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/"));
+    }
+    if(leader_sequence_three_keys(FI_R, FI_A, FI_U)) {
+        SEND_STRING(SS_LSFT("/") "Audit3dmFile\n");
+    }
+
     // Git key combos
     if(leader_sequence_two_keys(FI_G, FI_D)) {
         SEND_STRING("git diff\n");
@@ -361,10 +374,10 @@ void leader_end_user(void) {
         SEND_STRING("git log\n");
     }
     if(leader_sequence_two_keys(FI_G, FI_P)) {
-        SEND_STRING("git pull //ff/only");
+        SEND_STRING("git pull //ff/only\n");
     }
     if(leader_sequence_three_keys(FI_G, FI_S, FI_U)) {
-        SEND_STRING("git submodule update //init //recursive");
+        SEND_STRING("git submodule update //init //recursive\n");
     }
     // Rhino discourse keycombos
     if(leader_sequence_four_keys(FI_D, FI_R, FI_S, FI_I)) {
@@ -578,15 +591,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 void keyboard_post_init_user(void) {
-    rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
-    rgblight_set_speed(30);
+    //rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
+    rgblight_set_speed(80);
     //rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
     //rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
 }
 
-void suspend_wakeup_init_user(void) {
-    if(!rgblight_is_enabled()){
-        rgblight_enable();
-    }
+void suspend_power_down_user(void) {
+    rgblight_suspend();
 }
 
+void suspend_wakeup_init_user(void) {
+    rgblight_wakeup();
+}
