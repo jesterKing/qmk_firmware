@@ -1,9 +1,9 @@
 {
-    "manufacturer": "splitkb.com",
+    "manufacturer": "letworyinteractive.com",
     "url": "https://splitkb.com/products/kyria-pcb-kit",
-    "maintainer": "splitkb",
+    "maintainer": "jesterKing",
     "usb": {
-        "vid": "0x8D1D",
+        "vid": "0xFAB0",
         "device_version": "1.0.0"
     },
     "split": {
