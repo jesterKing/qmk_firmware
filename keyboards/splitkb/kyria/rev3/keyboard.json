@@ -1,8 +1,8 @@
 {
-    "keyboard_name": "Kyria rev3",
+    "keyboard_name": "jesterKbd v3",
     "development_board": "elite_c",
     "usb": {
-        "pid": "0xCF44"
+        "pid": "0xF00F"
     },
     "bootmagic": {
         "matrix": [0, 6]
