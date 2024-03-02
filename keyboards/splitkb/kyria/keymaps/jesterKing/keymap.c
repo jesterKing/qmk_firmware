@@ -342,13 +342,13 @@ void leader_end_user(void) {
         SEND_STRING(SS_LSFT("/") "SystemInfo\n");
     }
     if(leader_sequence_three_keys(FI_R, FI_R, FI_A)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/")"Raytraced\n");
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Raytraced\n");
     }
     if(leader_sequence_three_keys(FI_R, FI_R, FI_E)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/")"Rendered\n");
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Rendered\n");
     }
     if(leader_sequence_three_keys(FI_R, FI_D, FI_M)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "Mode"SS_LSFT("0") SS_LSFT("/"));
+        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/"));
     }
     if(leader_sequence_three_keys(FI_R, FI_A, FI_U)) {
         SEND_STRING(SS_LSFT("/") "Audit3dmFile\n");
