@@ -5,6 +5,7 @@ LEADER_ENABLE     = yes      # Enable the Leader Key feature
 TAP_DANCE_ENABLE  = yes      # Enable tap dance
 MOUSEKEY_ENABLE   = yes      # Enable mouse keys
 EXTRAKEY_ENABLE   = yes      # Enable audio and system control keys
+COMBO_ENABLE      = yes      # Enable combos
 CONSOLE_ENABLE    = no       # Enable debug printing, use in concert with hid-listen
 
 LTO_ENABLE        = yes      # Enable link-time optimization for smaller firmware
