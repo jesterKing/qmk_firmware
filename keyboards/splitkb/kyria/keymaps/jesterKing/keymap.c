@@ -83,6 +83,15 @@ const uint32_t PROGMEM unicode_map[] = {
     [PI]  = 0x01d70b   // 𝜋
 };
 
+// Add key combos, start with curly braces
+const uint16_t PROGMEM test_combo1[] = {KC_W, KC_Y, COMBO_END};
+const uint16_t PROGMEM test_combo2[] = {KC_A, KC_O, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(test_combo1, FI_LCBR),
+    COMBO(test_combo2, FI_RCBR),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * Base layer: DAS
@@ -184,7 +193,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      _______,  KC_1, 	  KC_2,    KC_3,    KC_4,    KC_5,                                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
+      _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
       RGB_MOD,  _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_PGUP, KC_LEFT, KC_UP,   KC_RGHT, _______, _______,
       RGB_RMOD, _______, _______, _______, KC_MUTE, KC_VOLD, KC_LALT, _______, _______, _______, KC_PGDN, KC_HOME, KC_DOWN, KC_END,  _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -240,6 +249,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     bool is_mac = get_unicode_input_mode() == UNICODE_MODE_MACOS;
     bool is_linx = get_unicode_input_mode() == UNICODE_MODE_LINUX;
 
+#ifdef CONSOLE_ENABLE
+    dprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+    dprintf("\t0x%04X 0x%04X\n", FI_LCBR, FI_RCBR);
+#endif
+
     switch (keycode)
     {
     case DAS:
@@ -277,21 +291,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case FI_LCBR:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(S(FI_8)));
+            dprintf("hit LCBR on mac\n");
+            tap_code16(LSA(KC_8));
             return false;
         }
         return true;
     case FI_RCBR:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(S(FI_9)));
+            dprintf("hit RCBR on mac\n");
+            tap_code16(LSA(KC_9));
+            return false;
+        }
+        return true;
+    case FI_BSLS:
+        if(record->event.pressed && is_mac)
+        {
+            tap_code16(RALT(S(FI_7)));
             return false;
         }
         return true;
     case FI_PIPE:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(S(FI_7)));
+            tap_code16(RALT(FI_7));
             return false;
         }
         return true;
@@ -599,6 +622,11 @@ void keyboard_post_init_user(void) {
     rgblight_set_speed(80);
     //rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
     //rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
+#ifdef CONSOLE_ENABLE
+    debug_enable = true;
+    debug_matrix = false;
+    debug_keyboard = true;
+#endif
 }
 
 void suspend_power_down_user(void) {
