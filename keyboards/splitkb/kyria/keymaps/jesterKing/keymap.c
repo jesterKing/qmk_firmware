@@ -46,8 +46,8 @@ enum jk_unicode_names {
 enum my_keycodes { DAS = SAFE_RANGE, QWRT, PLVR };
 
 enum layers {
-    _QWERTY = 0,
-    _DAS,
+    _DAS = 0,
+    _QWERTY,
     _PLOVER,
     _LOWER,
     _RAISE,
@@ -85,7 +85,27 @@ const uint32_t PROGMEM unicode_map[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
-     * Base Layer: QWERTY ISO
+     * Base layer: DAS
+     *
+     * ,-------------------------------------------.                              ,-------------------------------------------.
+     * |RAIS/ESC|   P  |   H  |   R  |  K   |  <>  |                              |  '*  |  W   |  U   |  Y   |  B   |   QZ   |
+     * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+     * |   F    |  S   |   L  |   N  |  T   |  V   |                              |  G   |  A   |  I   |  O   |  E   |   C    |
+     * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+     * | Ctrl/BS|  X   |   D  |   M  |  J   |  Å   |LShift|Leader|  |RShift|  ?   |  Ö   |  Ä   |  ,;  |  .:  |  -_  |   Z    |
+     * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+     *                        | GUI  | Enter| Del  | Space| Esc  |  | Tab  | Space| Bksp | Enter| Alt  |
+     *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise| RAlt |      |      |
+     *                        `----------------------------------'  `----------------------------------'
+     */
+    [_DAS] = LAYOUT(
+        HI_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
+        FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
+        CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
+                             KGUI, KENT, ALTDEL, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  RLTBSP, KENT, KC_LALT),
+
+    /*
+     * Layer: QWERTY ISO, used on finnish key layout:
      *
      * Changes:
      *  . LSHIFT -> KC_NUBS
@@ -107,25 +127,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CT_BSP,  FI_Z, FI_X, FI_C, FI_V, FI_B,   KC_LSFT, QK_LEAD,   KC_RSFT, FI_DIAE, FI_N,   FI_M, FI_COMM, FI_DOT, FI_MINS, FI_QUOT,
                              KGUI, KENT, ALTDEL, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  RLTBSP, KENT, KC_LALT),
 
-/*
- * Layer template
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |RAIS/ESC|   P  |   H  |   R  |  K   |  <>  |                              |  '*  |  W   |  U   |  Y   |  B   |   QZ   |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |   F    |  S   |   L  |   N  |  T   |  V   |                              |  G   |  A   |  I   |  O   |  E   |   C    |
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | Ctrl/BS|  X   |   D  |   M  |  J   |  Å   |LShift|Leader|  |RShift|  ?   |  Ö   |  Ä   |  ,;  |  .:  |  -_  |   Z    |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | GUI  | Enter| Del  | Space| Esc  |  | Tab  | Space| Bksp | Enter| Alt  |
- *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise| RAlt |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_DAS] = LAYOUT(
-        HI_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
-        FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
-        CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
-                             KGUI, KENT, ALTDEL, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  RLTBSP, KENT, KC_LALT),
 
 /*
 * Plover / Steno
