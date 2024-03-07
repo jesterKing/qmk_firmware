@@ -83,13 +83,21 @@ const uint32_t PROGMEM unicode_map[] = {
     [PI]  = 0x01d70b   // 𝜋
 };
 
-// Add key combos, start with curly braces
-const uint16_t PROGMEM test_combo1[] = {KC_W, KC_Y, COMBO_END};
-const uint16_t PROGMEM test_combo2[] = {KC_A, KC_O, COMBO_END};
+// Add key combos
+const uint16_t PROGMEM cmb_lprn[] = {FI_W, FI_A, COMBO_END};
+const uint16_t PROGMEM cmb_rprn[] = {FI_Y, FI_O, COMBO_END};
+const uint16_t PROGMEM cmb_lcbr[] = {FI_A, FI_ADIA, COMBO_END};
+const uint16_t PROGMEM cmb_rcbr[] = {FI_O, FI_DOT, COMBO_END};
+const uint16_t PROGMEM cmb_lbrc[] = {FI_H, FI_L, COMBO_END};
+const uint16_t PROGMEM cmb_rbrc[] = {FI_K, FI_T, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(test_combo1, FI_LCBR),
-    COMBO(test_combo2, FI_RCBR),
+    COMBO(cmb_lprn, FI_LPRN),
+    COMBO(cmb_rprn, FI_RPRN),
+    COMBO(cmb_lcbr, FI_LCBR),
+    COMBO(cmb_rcbr, FI_RCBR),
+    COMBO(cmb_lbrc, FI_LBRC),
+    COMBO(cmb_rbrc, FI_RBRC),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
