@@ -84,20 +84,32 @@ const uint32_t PROGMEM unicode_map[] = {
 };
 
 // Add key combos
-const uint16_t PROGMEM cmb_lprn[] = {FI_W, FI_A, COMBO_END};
-const uint16_t PROGMEM cmb_rprn[] = {FI_Y, FI_O, COMBO_END};
-const uint16_t PROGMEM cmb_lcbr[] = {FI_A, FI_ADIA, COMBO_END};
-const uint16_t PROGMEM cmb_rcbr[] = {FI_O, FI_DOT, COMBO_END};
-const uint16_t PROGMEM cmb_lbrc[] = {FI_H, FI_L, COMBO_END};
-const uint16_t PROGMEM cmb_rbrc[] = {FI_K, FI_T, COMBO_END};
+const uint16_t PROGMEM cmb_lprn[]  = {FI_W, FI_A, COMBO_END};
+const uint16_t PROGMEM cmb_rprn[]  = {FI_Y, FI_O, COMBO_END};
+const uint16_t PROGMEM cmb_lcbr[]  = {FI_A, FI_ADIA, COMBO_END};
+const uint16_t PROGMEM cmb_rcbr[]  = {FI_O, FI_DOT, COMBO_END};
+const uint16_t PROGMEM cmb_lbrc[]  = {FI_H, FI_L, COMBO_END};
+const uint16_t PROGMEM cmb_rbrc[]  = {FI_K, FI_T, COMBO_END};
+const uint16_t PROGMEM cmb_bksp1[] = {FI_I, FI_O, FI_E, COMBO_END};
+const uint16_t PROGMEM cmb_bksp2[] = {FI_N, FI_L, FI_S, COMBO_END};
+const uint16_t PROGMEM cmb_del1[]  = {FI_A, FI_I, FI_O, COMBO_END};
+const uint16_t PROGMEM cmb_del2[]  = {FI_T, FI_N, FI_L, COMBO_END};
+const uint16_t PROGMEM cmb_ent1[]  = {FI_U, FI_Y, FI_B, COMBO_END};
+const uint16_t PROGMEM cmb_ent2[]  = {FI_R, FI_H, FI_P, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(cmb_lprn, FI_LPRN),
-    COMBO(cmb_rprn, FI_RPRN),
-    COMBO(cmb_lcbr, FI_LCBR),
-    COMBO(cmb_rcbr, FI_RCBR),
-    COMBO(cmb_lbrc, FI_LBRC),
-    COMBO(cmb_rbrc, FI_RBRC),
+    COMBO(cmb_lprn,  FI_LPRN),
+    COMBO(cmb_rprn,  FI_RPRN),
+    COMBO(cmb_lcbr,  FI_LCBR),
+    COMBO(cmb_rcbr,  FI_RCBR),
+    COMBO(cmb_lbrc,  FI_LBRC),
+    COMBO(cmb_rbrc,  FI_RBRC),
+    COMBO(cmb_bksp1, KC_BSPC),
+    COMBO(cmb_bksp2, KC_BSPC),
+    COMBO(cmb_del1,  KC_DEL),
+    COMBO(cmb_del2,  KC_DEL),
+    COMBO(cmb_ent1,  KENT),
+    COMBO(cmb_ent2,  KENT),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
