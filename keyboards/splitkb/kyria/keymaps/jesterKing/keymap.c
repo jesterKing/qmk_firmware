@@ -90,12 +90,16 @@ const uint16_t PROGMEM cmb_lcbr[]  = {FI_A, FI_ADIA, COMBO_END};
 const uint16_t PROGMEM cmb_rcbr[]  = {FI_O, FI_DOT, COMBO_END};
 const uint16_t PROGMEM cmb_lbrc[]  = {FI_H, FI_L, COMBO_END};
 const uint16_t PROGMEM cmb_rbrc[]  = {FI_K, FI_T, COMBO_END};
-const uint16_t PROGMEM cmb_bksp1[] = {FI_I, FI_O, FI_E, COMBO_END};
-const uint16_t PROGMEM cmb_bksp2[] = {FI_N, FI_L, FI_S, COMBO_END};
-const uint16_t PROGMEM cmb_del1[]  = {FI_A, FI_I, FI_O, COMBO_END};
-const uint16_t PROGMEM cmb_del2[]  = {FI_T, FI_N, FI_L, COMBO_END};
-const uint16_t PROGMEM cmb_ent1[]  = {FI_U, FI_Y, FI_B, COMBO_END};
-const uint16_t PROGMEM cmb_ent2[]  = {FI_R, FI_H, FI_P, COMBO_END};
+const uint16_t PROGMEM cmb_labk[]  = {FI_L, FI_D, COMBO_END};
+const uint16_t PROGMEM cmb_rabk[]  = {FI_T, FI_J, COMBO_END};
+const uint16_t PROGMEM cmb_bksp1[] = {FI_U, FI_Y, FI_B, COMBO_END};
+const uint16_t PROGMEM cmb_del1[]  = {FI_W, FI_U, FI_Y, COMBO_END};
+const uint16_t PROGMEM cmb_ent1[]  = {FI_A, FI_O, COMBO_END};
+const uint16_t PROGMEM cmb_fwsl[]  = {FI_U, FI_I, COMBO_END};
+const uint16_t PROGMEM cmb_bksl[]  = {FI_R, FI_N, COMBO_END};
+const uint16_t PROGMEM cmb_star[]  = {FI_I, FI_COMM, COMBO_END};
+
+//const uint16_t PROGMEM cmb_ent2[]  = {FI_R, FI_H, FI_P, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(cmb_lprn,  FI_LPRN),
@@ -104,12 +108,14 @@ combo_t key_combos[] = {
     COMBO(cmb_rcbr,  FI_RCBR),
     COMBO(cmb_lbrc,  FI_LBRC),
     COMBO(cmb_rbrc,  FI_RBRC),
+    COMBO(cmb_labk,  FI_LABK),
+    COMBO(cmb_rabk,  FI_RABK),
     COMBO(cmb_bksp1, KC_BSPC),
-    COMBO(cmb_bksp2, KC_BSPC),
     COMBO(cmb_del1,  KC_DEL),
-    COMBO(cmb_del2,  KC_DEL),
     COMBO(cmb_ent1,  KENT),
-    COMBO(cmb_ent2,  KENT),
+    COMBO(cmb_fwsl,  FI_SLSH),
+    COMBO(cmb_bksl,  FI_BSLS),
+    COMBO(cmb_star,  FI_ASTR),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -131,7 +137,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         HI_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
         FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
         CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
-                             KGUI, KENT, ALTDEL, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  RLTBSP, KENT, KC_LALT),
+                             KGUI, KC_BRID, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, KC_BRIU, KC_CAPS
+    ),
 
     /*
      * Layer: QWERTY ISO, used on finnish key layout:
