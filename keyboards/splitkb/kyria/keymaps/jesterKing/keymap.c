@@ -270,6 +270,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
+static uint8_t get_send_delay(void) {
+    uint8_t cur_unicode_mode = get_unicode_input_mode();
+    switch(cur_unicode_mode)  {
+        case UNICODE_MODE_WINDOWS:
+        case UNICODE_MODE_WINCOMPOSE:
+        case UNICODE_MODE_LINUX:
+            return 0;
+            break;
+        case UNICODE_MODE_MACOS:
+        default:
+            return 25;
+            break;
+    }
+    return 25;
+}
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
@@ -368,7 +384,8 @@ void matrix_init_user(void) {
 }
 
 void leader_end_user(void) {
-    if(leader_sequence_one_key(FI_C)) { // Inline Code
+    uint8_t delay = get_send_delay();
+    if (leader_sequence_one_key(FI_C)) { // Inline Code
         tap_code16(FI_GRV);
         tap_code16(KC_SPC);
         tap_code16(FI_GRV);
@@ -393,13 +410,13 @@ void leader_end_user(void) {
         SEND_STRING(SS_LSFT("/") "SystemInfo\n");
     }
     if(leader_sequence_three_keys(FI_R, FI_R, FI_A)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Raytraced\n");
+        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Raytraced\n", delay);
     }
     if(leader_sequence_three_keys(FI_R, FI_R, FI_E)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Rendered\n");
+        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Rendered\n", delay);
     }
     if(leader_sequence_three_keys(FI_R, FI_D, FI_M)) {
-        SEND_STRING("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/"));
+        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/"), delay);
     }
     if(leader_sequence_three_keys(FI_R, FI_A, FI_U)) {
         SEND_STRING(SS_LSFT("/") "Audit3dmFile\n");
