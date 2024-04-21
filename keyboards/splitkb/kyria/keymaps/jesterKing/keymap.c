@@ -25,6 +25,8 @@
 
 #include "keymap_finnish.h"
 
+#define LCS(kc) (QK_LCTL | QK_LSFT | (kc))
+
 #define ALTDEL  MT(MOD_LALT, KC_DEL)
 #define RLTBSP  MT(MOD_RALT, KC_BSPC)
 #define LO_SPC  LT(_LOWER, KC_SPC)
@@ -43,12 +45,62 @@ enum jk_unicode_names {
     PI
 };
 
-enum my_keycodes { DAS = SAFE_RANGE, QWRT, PLVR };
+enum my_keycodes {
+    // layer switchers
+    DAS = SAFE_RANGE,
+    QWRT,
+    PLVR,
+    BLND,
+    RHNO,
+    // layer specific keycodes
+
+    // Blender keys
+    B_ADD,  // shift+a
+
+    B_UNDO, // ctrl or cmd Z
+    B_REDO, // ctrl or cmd shift Z
+
+    B_GRB,    // Grab
+    B_GRB_X,  // Grab, move in X
+    B_GRB_XX, // Grab, move in local X
+    B_GRB_NX, // Grab, move in YZ
+    B_GRB_Y,  // Grab, move in Y
+    B_GRB_YY, // Grab, move in local Y
+    B_GRB_NY, // Grab, move in XZ
+    B_GRB_Z,  // Grab, move in Z
+    B_GRB_ZZ, // Grab, move in localZ
+    B_GRB_NZ, // Grab, move in XY
+    B_SCL,    // Scale
+    B_SCL_X,  // Scale, in X
+    B_SCL_XX, // Scale, in local X
+    B_SCL_NX, // Scale, in YZ
+    B_SCL_YY, // Scale, in local Y
+    B_SCL_NY, // Scale, in XZ
+    B_SCL_ZZ, // Scale, in local Z
+    B_SCL_NZ, // Scale, in XY
+    B_ROT,    // Rotate
+    B_ROT_X,  // Rotate, around X
+    B_ROT_XX, // Rotate, around local X
+    B_ROT_NX, // Rotate, around YZ
+    B_ROT_Y,  // Rotate, around Y
+    B_ROT_YY, // Rotate, around local Y
+    B_ROT_NY, // Rotate, around XZ
+    B_ROT_Z,  // Rotate, around Z
+    B_ROT_ZZ, // Rotate, around local Z
+    B_ROT_NZ, // Rotate, around XY
+
+    B_P_MOD, // Mode pie
+    B_P_EDIT, // Editor pie
+
+
+    };
 
 enum layers {
     _DAS = 0,
     _QWERTY,
     _PLOVER,
+    _BLENDER,
+    _RHINO,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -62,7 +114,7 @@ enum {
     TD_PLUS_MIN,
     TD_DIV_MULT,
     TD_Q_Z,
-    TD_EQL_AMPR
+    TD_EQL_AMPR,
 };
 
 // Tap Dance definitions
@@ -99,6 +151,21 @@ const uint16_t PROGMEM cmb_fwsl[]  = {FI_U, FI_I, COMBO_END};
 const uint16_t PROGMEM cmb_bksl[]  = {FI_R, FI_N, COMBO_END};
 const uint16_t PROGMEM cmb_star[]  = {FI_I, FI_COMM, COMBO_END};
 
+// Blender-specific combos
+const uint16_t PROGMEM cmb_grbnx[]  = {B_GRB, FI_X, COMBO_END};
+const uint16_t PROGMEM cmb_rotnx[]  = {B_ROT, FI_X, COMBO_END};
+const uint16_t PROGMEM cmb_sclnx[]  = {B_SCL, FI_X, COMBO_END};
+
+const uint16_t PROGMEM cmb_grbny[]  = {B_GRB, FI_Y, COMBO_END};
+const uint16_t PROGMEM cmb_rotny[]  = {B_ROT, FI_Y, COMBO_END};
+const uint16_t PROGMEM cmb_sclny[]  = {B_SCL, FI_Y, COMBO_END};
+
+const uint16_t PROGMEM cmb_grbnz[]  = {B_GRB, FI_Z, COMBO_END};
+const uint16_t PROGMEM cmb_rotnz[]  = {B_ROT, FI_Z, COMBO_END};
+const uint16_t PROGMEM cmb_sclnz[]  = {B_SCL, FI_Z, COMBO_END};
+
+const uint16_t PROGMEM cmb_pie_editor[]  = {B_ADD, B_P_MOD, COMBO_END};
+
 //const uint16_t PROGMEM cmb_ent2[]  = {FI_R, FI_H, FI_P, COMBO_END};
 
 combo_t key_combos[] = {
@@ -116,6 +183,22 @@ combo_t key_combos[] = {
     COMBO(cmb_fwsl,  FI_SLSH),
     COMBO(cmb_bksl,  FI_BSLS),
     COMBO(cmb_star,  FI_ASTR),
+
+    // Blender combos
+
+    COMBO(cmb_pie_editor, B_P_EDIT),
+
+    COMBO(cmb_grbnx,  B_GRB_NX),
+    COMBO(cmb_rotnx,  B_ROT_NX),
+    COMBO(cmb_sclnx,  B_SCL_NX),
+
+    COMBO(cmb_grbny,  B_GRB_NY),
+    COMBO(cmb_rotny,  B_ROT_NY),
+    COMBO(cmb_sclny,  B_SCL_NY),
+
+    COMBO(cmb_grbnz,  B_GRB_NZ),
+    COMBO(cmb_rotnz,  B_ROT_NZ),
+    COMBO(cmb_sclnz,  B_SCL_NZ),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -137,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         HI_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
         FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
         CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
-                             KGUI, KC_BRID, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, KC_BRIU, KC_CAPS
+                             KGUI, XXXXXXX, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, XXXXXXX, KC_CAPS
     ),
 
     /*
@@ -183,6 +266,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      STN_FN,  STN_S1, STN_TL, STN_PL,  STN_HL,  STN_ST1,                                     STN_ST3, STN_FR,  STN_PR, STN_LR, STN_TR, STN_DR,
      XXXXXXX, STN_S2, STN_KL, STN_WL,  STN_RL,  STN_ST2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, STN_ST4, STN_RR,  STN_BR, STN_GR, STN_SR, STN_ZR,
                               XXXXXXX, XXXXXXX, STN_A,   STN_O,   _______, _______, STN_E,   STN_U,   XXXXXXX, XXXXXXX
+   ),
+/*
+* Blender layer. Letft-hand centric setup for use with
+* drawing surface.
+*
+* ,-------------------------------------------.                              ,-------------------------------------------.
+* |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+* |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+* |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+* |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+* |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
+* `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+*                        |      |      |      |      |      |  |      |      |      |      |      |
+*                        |      |      |      |      |      |  |      |      |      |      |      |
+*                        `----------------------------------'  `----------------------------------'
+*/
+   [_BLENDER] = LAYOUT(
+     XXXXXXX, XXXXXXX,    FI_Z,    FI_Y,    FI_X, B_P_MOD,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
+     XXXXXXX, XXXXXXX,   B_SCL,   B_ROT,   B_GRB,   B_ADD,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     KC_LCTL, KC_LSFT, KC_LALT,   FI_T,    FI_N,  XXXXXXX,  B_REDO, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                XXXXXXX, XXXXXXX, XXXXXXX,  B_UNDO,  KC_ESC,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
    ),
 
 /*
@@ -239,9 +343,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      UC_WINC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,    KC_F8,   KC_F9,   KC_F10,   KC_F11,
-      UC_MAC, _______, _______, DAS  ,    PLVR,      QWRT,                                     KC_WH_U, KC_MS_L,  KC_MS_U, KC_MS_R, _______,  KC_F12,
-      UC_LINX, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_WH_D, KC_BTN1,  KC_MS_D, KC_BTN2, _______, QK_BOOT,
+      UC_WINC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,    KC_F8,   KC_F9,  KC_F10,  KC_F11,
+      UC_MAC,  _______, _______, DAS  ,    PLVR,    QWRT,                                     KC_WH_U, KC_MS_L,  KC_MS_U, KC_MS_R, _______,  KC_F12,
+      UC_LINX, _______, _______, BLND ,    RHNO, _______, _______, _______, _______, _______, KC_WH_D, KC_BTN1,  KC_MS_D, KC_BTN2, _______, QK_BOOT,
                                  _______, _______, _______, _______, _______, _______, _______, _______, KC_BTN3,  _______
     ),
 // /*
@@ -317,6 +421,185 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
             set_single_persistent_default_layer(_PLOVER);
         }
         return false;
+    case BLND:
+        if(record->event.pressed)
+        {
+            set_single_persistent_default_layer(_BLENDER);
+        }
+        return false;
+    case B_ADD:
+        if(record->event.pressed)
+        {
+            tap_code16(LSFT(FI_A));
+            //SEND_STRING("Pie Edit");
+        }
+        return false;
+    case B_UNDO:
+        if(record->event.pressed)
+        {
+            if(is_mac)
+            {
+                tap_code16(LCMD(FI_Z));
+            }
+            else
+            {
+                tap_code16(LCTL(FI_Z));
+            }
+        }
+        return false;
+    case B_REDO:
+        if(record->event.pressed)
+        {
+            if(is_mac)
+            {
+                tap_code16(SCMD(FI_Z));
+            }
+            else
+            {
+                tap_code16(LCS(FI_Z));
+            }
+        }
+        return false;
+    case B_P_EDIT:
+        if(record->event.pressed)
+        {
+            tap_code16(LCA(FI_S));
+            //SEND_STRING("Pie Edit");
+        }
+        return false;
+    case B_P_MOD:
+        if(record->event.pressed)
+        {
+            tap_code16(LCTL(KC_TAB));
+            //SEND_STRING("Pie Mode");
+        }
+        return false;
+    case B_GRB:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+        }
+        return false;
+    case B_GRB_X:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_GRB_XX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+            tap_code16(FI_X);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_GRB_NX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+            tap_code16(LSFT(FI_X));
+        }
+        return false;
+    case B_GRB_NY:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+            tap_code16(LSFT(FI_Y));
+        }
+        return false;
+    case B_GRB_NZ:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_G);
+            tap_code16(LSFT(FI_Z));
+        }
+        return false;
+    case B_ROT:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+        }
+        return false;
+    case B_ROT_X:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_ROT_XX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+            tap_code16(FI_X);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_ROT_NX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+            tap_code16(LSFT(FI_X));
+        }
+        return false;
+    case B_ROT_NY:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+            tap_code16(LSFT(FI_Y));
+        }
+        return false;
+    case B_ROT_NZ:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_R);
+            tap_code16(LSFT(FI_Z));
+        }
+        return false;
+    case B_SCL:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+        }
+        return false;
+    case B_SCL_X:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_SCL_XX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+            tap_code16(FI_X);
+            tap_code16(FI_X);
+        }
+        return false;
+    case B_SCL_NX:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+            tap_code16(LSFT(FI_X));
+        }
+        return false;
+    case B_SCL_NY:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+            tap_code16(LSFT(FI_Y));
+        }
+        return false;
+    case B_SCL_NZ:
+        if(record->event.pressed)
+        {
+            tap_code16(FI_S);
+            tap_code16(LSFT(FI_Z));
+        }
+        return false;
     case FI_LBRC:
         if(record->event.pressed && is_mac)
         {
@@ -334,7 +617,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case FI_LCBR:
         if(record->event.pressed && is_mac)
         {
-            dprintf("hit LCBR on mac\n");
+            //dprintf("hit LCBR on mac\n");
             tap_code16(LSA(KC_8));
             return false;
         }
@@ -342,7 +625,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case FI_RCBR:
         if(record->event.pressed && is_mac)
         {
-            dprintf("hit RCBR on mac\n");
+            //dprintf("hit RCBR on mac\n");
             tap_code16(LSA(KC_9));
             return false;
         }
@@ -578,6 +861,11 @@ static void render_status(void) {
             oled_write_P(PSTR("?\n"), false);
     }
 
+    oled_write_P(PSTR("BL"), current_default_layer == _BLENDER);
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(PSTR("RH"), current_default_layer == _RHINO);
+    oled_write_P(PSTR(" \n"), false);
+
     // Host Keyboard LED Status
     led_t led_state = host_keyboard_led_state();
     oled_write_P(led_state.num_lock ? PSTR("NUMLCK ") : PSTR("       "), false);
@@ -612,7 +900,6 @@ bool oled_task_user(void) {
     return false;
 }
 
-#ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
     uint8_t layer = get_highest_layer(layer_state);
     if (index == 0) {
@@ -659,7 +946,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
-#endif
 
 void keyboard_post_init_user(void) {
     //rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
