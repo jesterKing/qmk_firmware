@@ -51,6 +51,7 @@ enum my_keycodes {
     QWRT,
     PLVR,
     BLND,
+    GAME,
     RHNO,
     // layer specific keycodes
 
@@ -100,6 +101,7 @@ enum layers {
     _QWERTY,
     _PLOVER,
     _BLENDER,
+    _GAMER,
     _RHINO,
     _LOWER,
     _RAISE,
@@ -290,6 +292,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ),
 
 /*
+ * WASD gaming layer
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |    1   |  TAB |   Q  |   X  |   E  |   R  |                              |      |      |      |      |      |   DAS  |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |    2   | SHFT |   A  |   W  |   D  |   F  |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |    3   | CTRL |   Z  |   S  |   C  |   V  |      |  ESC |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |  SPC |      |  |      |  SPC |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_GAMER] = LAYOUT(
+         KC_1,  KC_TAB,    FI_Q,    FI_X,    FI_E,    FI_R,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
+         KC_2, KC_LSFT,    FI_A,    FI_W,    FI_D,    FI_F,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+         KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V, XXXXXXX,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                 XXXXXXX, XXXXXXX, XXXXXXX,    KSPC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+/*
  * Lower Layer: Symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
@@ -345,7 +367,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       UC_WINC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,    KC_F8,   KC_F9,  KC_F10,  KC_F11,
       UC_MAC,  _______, _______, DAS  ,    PLVR,    QWRT,                                     KC_WH_U, KC_MS_L,  KC_MS_U, KC_MS_R, _______,  KC_F12,
-      UC_LINX, _______, _______, BLND ,    RHNO, _______, _______, _______, _______, _______, KC_WH_D, KC_BTN1,  KC_MS_D, KC_BTN2, _______, QK_BOOT,
+      UC_LINX, _______, _______, BLND ,    RHNO,    GAME, _______, _______, _______, _______, KC_WH_D, KC_BTN1,  KC_MS_D, KC_BTN2, _______, QK_BOOT,
                                  _______, _______, _______, _______, _______, _______, _______, _______, KC_BTN3,  _______
     ),
 // /*
@@ -375,7 +397,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 static uint8_t get_send_delay(void) {
-    uint8_t cur_unicode_mode = get_unicode_input_mode();
+    return 0;
+    /*uint8_t cur_unicode_mode = get_unicode_input_mode();
     switch(cur_unicode_mode)  {
         case UNICODE_MODE_WINDOWS:
         case UNICODE_MODE_WINCOMPOSE:
@@ -388,7 +411,9 @@ static uint8_t get_send_delay(void) {
             break;
     }
     return 25;
+    */
 }
+
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
@@ -425,6 +450,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         if(record->event.pressed)
         {
             set_single_persistent_default_layer(_BLENDER);
+        }
+        return false;
+    case GAME:
+        if(record->event.pressed)
+        {
+            set_single_persistent_default_layer(_GAMER);
         }
         return false;
     case B_ADD:
@@ -864,6 +895,8 @@ static void render_status(void) {
     oled_write_P(PSTR("BL"), current_default_layer == _BLENDER);
     oled_write_P(PSTR(" "), false);
     oled_write_P(PSTR("RH"), current_default_layer == _RHINO);
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(PSTR("GAME"), current_default_layer == _GAMER);
     oled_write_P(PSTR(" \n"), false);
 
     // Host Keyboard LED Status
@@ -950,10 +983,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 void keyboard_post_init_user(void) {
     //rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
     rgblight_set_speed(80);
-    //rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
-    //rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
+    while(rgblight_get_val() > 72)
+    {
+        rgblight_decrease_val();
+    }
+    rgb_matrix_set_speed(40);
+    // rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
+    // rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
 #ifdef CONSOLE_ENABLE
-    debug_enable = true;
+        debug_enable = true;
     debug_matrix = false;
     debug_keyboard = true;
 #endif
