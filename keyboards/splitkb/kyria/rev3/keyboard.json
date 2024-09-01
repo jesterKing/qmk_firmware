@@ -1,6 +1,7 @@
 {
     "keyboard_name": "jesterKbd v3",
-    "development_board": "elite_c",
+    "development_board": "liatris",
+    "pin_compatible": "elite_c",
     "usb": {
         "pid": "0xF00F"
     },
