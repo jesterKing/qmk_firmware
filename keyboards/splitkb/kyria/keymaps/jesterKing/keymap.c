@@ -328,7 +328,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT(
       FI_BSLS, FI_EXLM, FI_DQUO, FI_AT,   FI_EURO, FI_PERC,                                     TD(TD_LBRC_RBRC), KC_7, KC_8, KC_9, FI_PIPE,         FI_PND,
       FI_SECT, FI_HASH, FI_DLR,  TD(TD_EQL_AMPR),  FI_DIAE, FI_GRV,                             TD(TD_LPRN_RPRN), KC_4, KC_5, KC_6, TD(TD_PLUS_MIN), TD(TD_DIV_MULT),
-      FI_MICR, FI_HALF, FI_CURR, X(DEG),  FI_CIRC, FI_TILD, _______, _______, _______, KC_LALT, TD(TD_LCBR_RCBR), KC_1, KC_2, KC_3, FI_QUES,         X(PI),
+      FI_MICR, FI_HALF, FI_CURR, UM(DEG),  FI_CIRC, FI_TILD, _______, _______, _______, KC_LALT, TD(TD_LCBR_RCBR), KC_1, KC_2, KC_3, FI_QUES,         UM(PI),
                                  _______, _______, _______, FI_SCLN, FI_QUES, FI_SCLN, _______, KC_0, KBSP, _______
     ),
 /*
