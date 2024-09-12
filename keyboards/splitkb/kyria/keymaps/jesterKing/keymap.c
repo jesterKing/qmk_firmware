@@ -219,10 +219,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                        `----------------------------------'  `----------------------------------'
      */
     [_DAS] = LAYOUT(
-        HI_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
+        KC_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
         FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
         CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
-                             KGUI, XXXXXXX, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, XXXXXXX, KC_CAPS
+                             KGUI, QK_LEAD, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, QK_LEAD, KC_CAPS
     ),
 
     /*
