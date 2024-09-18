@@ -299,7 +299,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |    2   | SHFT |   A  |   W  |   D  |   F  |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |    3   | CTRL |   Z  |   S  |   C  |   V  |      |  ESC |  |      |      |      |      |      |      |      |        |
+ * |    3   | CTRL |   Z  |   S  |   C  |   V  |   T  |  ESC |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |  SPC |      |  |      |  SPC |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
@@ -307,7 +307,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAMER] = LAYOUT(
          KC_1,  KC_TAB,    FI_Q,    FI_X,    FI_E,    FI_R,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
          KC_2, KC_LSFT,    FI_A,    FI_W,    FI_D,    FI_F,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-         KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V, XXXXXXX,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+         KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V,    FI_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                  XXXXXXX, XXXXXXX, XXXXXXX,    KSPC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
