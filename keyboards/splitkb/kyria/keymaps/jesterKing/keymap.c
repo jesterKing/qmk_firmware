@@ -214,8 +214,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
      * | Ctrl/BS|  X   |   D  |   M  |  J   |  Å   |LShift|Leader|  |RShift|  ?   |  Ö   |  Ä   |  ,;  |  .:  |  -_  |   Z    |
      * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-     *                        | GUI  | Enter| Del  | Space| Esc  |  | Tab  | Space| Bksp | Enter| Alt  |
-     *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise| RAlt |      |      |
+     *                        | GUI  | Enter| Alt  | Space| Esc  |  | Tab  | Space|      | LEAD | CAPS |
+     *                        |      |      |      | Lower| Raise|  | Lower| Raise| RAlt |      |      |
      *                        `----------------------------------'  `----------------------------------'
      */
     [_DAS] = LAYOUT(
@@ -301,14 +301,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |    3   | CTRL |   Z  |   S  |   C  |   V  |   T  |  ESC |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |  SPC |      |  |      |  SPC |      |      |      |
+ *                        |      |      |      |  SPC |   M  |  |      |  SPC |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAMER] = LAYOUT(
          KC_1,  KC_TAB,    FI_Q,    FI_X,    FI_E,    FI_R,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
          KC_2, KC_LSFT,    FI_A,    FI_W,    FI_D,    FI_F,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
          KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V,    FI_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    KSPC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                                 XXXXXXX, XXXXXXX, XXXXXXX,    KSPC,   FI_M, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
 /*
@@ -357,9 +357,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |UC_WINC | F1   |  F2  | F3   | F4   | F5   |                              | F6   | F7   |  F8  | F9   | F10  | F11    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |UC_MAC |      |      | DAS  | PLVR | QWRT |                              | MWup | MLft | MUp  | MRgt |      | F12    |
+ * |UC_MAC  |      |      | DAS  | PLVR | QWRT |                              | MWup | MLft | MUp  | MRgt |      | F12    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |UC_LINX |      |      |      |      |      |      |      |  |      |      | MWdn | LMB  | MDn  | RMB  |      | QK_BOOT|
+ * |UC_LINX |      |      | BLND | RHNO | GAME |      |      |  |      |      | MWdn | LMB  | MDn  | RMB  |      | QK_BOOT|
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      | MMB  |
  *                        `----------------------------------'  `----------------------------------'
