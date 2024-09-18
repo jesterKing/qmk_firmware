@@ -66,7 +66,7 @@
       "c": "#71a3de",
       "f": 3
     },
-    "\n\\\n\n\n\n\nHi/Esc",
+    "\n\\\n\n\n\n\nEsc",
     {
       "f": 3
     },
@@ -143,7 +143,7 @@
       "c": "#71a3de",
       "f": 3
     },
-    "\n§\n\n\n\n\nf",
+    "rgb+\n§\n\n\n\n\nf",
     {
       "f": 3
     },
@@ -218,7 +218,7 @@
       "c": "#71a3de",
       "f": 3
     },
-    "\nµ\n\n\n\n\nCtrl/Bksp",
+    "rgb-\nµ\n\n\n\n\nCtrl/Bksp",
     {
       "f": 3
     },
@@ -231,7 +231,7 @@
     {
       "f": 3
     },
-    "\n𝜋\n\n\nBoot\n\n*"
+    "\n𝜋\n\n\nBoot\n\nz"
   ],
   [
     {
@@ -246,7 +246,7 @@
       "x": 10,
       "f": 3
     },
-    "-\n-\n+\n+\n\n\n\n\nrgb\nAltGr\nspd"
+    "-\n-\n+\n+\n\n\n\n\nrgb\nCAPS\nspd"
   ],
   [
     {
@@ -257,7 +257,7 @@
       "c": "#e6a3a3",
       "a": 7
     },
-    "ENTER"
+    "LEAD"
   ],
   [
     {
@@ -267,7 +267,7 @@
       "a": 5,
       "f": 3
     },
-    "\nBksp\n\n\nMMB\n\nENTER"
+    "\nBksp\n\n\nMMB\n\nLEAD"
   ],
   [
     {
@@ -277,7 +277,7 @@
       "x": -0.5,
       "a": 7
     },
-    "DEL/Alt"
+    "Alt"
   ],
   [
     {
@@ -305,7 +305,7 @@
       "sm": "cherry",
       "a": 7
     },
-    "LEADER"
+    "LEAD"
   ],
   [
     {
@@ -339,12 +339,13 @@
       "x": -0.5,
       "f": 3
     },
-    "RMB\nLAlt\n\n\n\n\nz"
+    "RMB\nLAlt\n\n\n\n\n?"
   ],
   [
     {
       "x": -0.5,
-      "a": 7
+      "a": 7,
+      "n": true
     },
     "Spc/Hi"
   ],
@@ -356,6 +357,6 @@
       "a": 5,
       "f": 3
     },
-    "\n0\n\n\n\n\nBksp/Ralt"
+    "\n0\n\n\n\n\nRalt"
   ]
 ]
