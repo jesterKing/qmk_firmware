@@ -148,7 +148,7 @@ const uint16_t PROGMEM cmb_labk[]  = {FI_L, FI_D, COMBO_END};
 const uint16_t PROGMEM cmb_rabk[]  = {FI_T, FI_J, COMBO_END};
 const uint16_t PROGMEM cmb_bksp1[] = {FI_U, FI_Y, FI_B, COMBO_END};
 const uint16_t PROGMEM cmb_del1[]  = {FI_W, FI_U, FI_Y, COMBO_END};
-const uint16_t PROGMEM cmb_ent1[]  = {FI_A, FI_O, COMBO_END};
+const uint16_t PROGMEM cmb_ent1[]  = {FI_A, FI_I, FI_O, COMBO_END};
 const uint16_t PROGMEM cmb_fwsl[]  = {FI_U, FI_I, COMBO_END};
 const uint16_t PROGMEM cmb_bksl[]  = {FI_R, FI_N, COMBO_END};
 const uint16_t PROGMEM cmb_star[]  = {FI_I, FI_COMM, COMBO_END};
@@ -301,14 +301,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |    3   | CTRL |   Z  |   S  |   C  |   V  |   T  |  ESC |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |  SPC |   M  |  |      |  SPC |      |      |      |
+ *                        |      |      |   B  |  SPC |   M  |  |      |  SPC |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAMER] = LAYOUT(
          KC_1,  KC_TAB,    FI_Q,    FI_X,    FI_E,    FI_R,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
          KC_2, KC_LSFT,    FI_A,    FI_W,    FI_D,    FI_F,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
          KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V,    FI_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    KSPC,   FI_M, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                                 XXXXXXX, XXXXXXX,    FI_B,    KSPC,   FI_M, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
 /*
