@@ -707,6 +707,26 @@ void leader_end_user(void) {
         tap_code16(FI_GRV);
         tap_code16(KC_SPC);
     }
+    if (leader_sequence_two_keys(FI_C, FI_C)) { // Inline Code begin and end code fence, up and space
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+
+        tap_code16(KC_ENT);
+
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+        tap_code16(FI_GRV);
+        tap_code16(KC_SPC);
+
+        tap_code16(KC_UP);
+        tap_code16(KC_SPC);
+    }
     if(leader_sequence_one_key(FI_S)) { // Windows screenshot
         SEND_STRING(SS_LGUI("\nS"));
     }
