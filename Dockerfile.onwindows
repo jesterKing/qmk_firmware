@@ -1,5 +1,5 @@
 # Build with: docker build -f Dockerfile -t jesterqmk .
-# Run with docker run -it -v .:/qmk jesterqmk
+# Run with docker run -it -v .:/qmk/local jesterqmk
 # Resulting  firmware will be on the host machine once ready
 FROM ubuntu:22.04
 
@@ -9,8 +9,13 @@ RUN apt-get install -y avrdude binutils-arm-none-eabi binutils-riscv64-unknown-e
 
 RUN python3 -m pip install qmk
 
+VOLUME [ "/qmk/local" ]
 WORKDIR /qmk
+RUN git clone --recursive https://github.com/jesterKing/qmk_firmware
+WORKDIR /qmk/qmk_firmware
+RUN git checkout jesterking_liatris
+RUN git submodule update --init --recursive
 
 #ENTRYPOINT [ "bash" ]
 
-CMD [ "bash", "-c", "/qmk/build_jesterKing.sh" ]
+CMD [ "bash", "-c", "/qmk/local/build_jesterKing.sh" ]
