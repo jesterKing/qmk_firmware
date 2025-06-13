@@ -1,0 +1,41 @@
+{
+    "tasks": [
+        {
+            "label": "build firmware",
+            "type": "shell",
+            "command": "docker",
+            "dependsOn": "build docker",
+            "args": [
+                "run",
+                "-it",
+                "--rm",
+                "-v",
+                "${workspaceFolder}:/qmk",
+                "jesterqmk",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build docker",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "build",
+                "-f",
+                "Dockerfile",
+                "-t",
+                "jesterqmk",
+                "${workspaceFolder}",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+    ]
+}
