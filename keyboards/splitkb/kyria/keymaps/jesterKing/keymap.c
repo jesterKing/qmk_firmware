@@ -23,8 +23,17 @@
  * in the default layout.
  */
 
-#include "keymap_finnish.h"
+//#include "keymap_finnish.h"
 #include "print.h"
+
+#define FI_ADIA ALGR(KC_Q)
+#define FI_ARNG ALGR(KC_W)
+#define FI_ODIA ALGR(KC_P)
+#define FI_MICR ALGR(KC_M)
+#define FI_CURR ALGR(KC_4)
+#define FI_SECT S(ALGR(KC_S))
+#define FI_DIAE S(KC_QUOT)
+#define FI_DQUO S(ALGR(KC_QUOT))
 
 #define LCS(kc) (QK_LCTL | QK_LSFT | (kc))
 
@@ -54,6 +63,12 @@ enum my_keycodes {
     BLND,
     GAME,
     RHNO,
+    BAR,
+
+    // own codes to handle special cases like semicolon-colon
+    JK_SCLN, // semicolon
+    JK_CLN,  // colon
+
     // layer specific keycodes
 
     // Blender keys
@@ -104,6 +119,7 @@ enum layers {
     _BLENDER,
     _GAMER,
     _RHINO,
+    _BAR, // beyond all reason
     _LOWER,
     _RAISE,
     _ADJUST
@@ -122,13 +138,13 @@ enum {
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_LPRN_RPRN] = ACTION_TAP_DANCE_DOUBLE(FI_LPRN, FI_RPRN),
-    [TD_LCBR_RCBR] = ACTION_TAP_DANCE_DOUBLE(FI_LCBR, FI_RCBR),
-    [TD_LBRC_RBRC] = ACTION_TAP_DANCE_DOUBLE(FI_LBRC, FI_RBRC),
-    [TD_PLUS_MIN]  = ACTION_TAP_DANCE_DOUBLE(FI_PLUS, FI_MINS),
-    [TD_DIV_MULT]  = ACTION_TAP_DANCE_DOUBLE(FI_SLSH, FI_ASTR),
-    [TD_Q_Z]       = ACTION_TAP_DANCE_DOUBLE(FI_Q, FI_Z),
-    [TD_EQL_AMPR]  = ACTION_TAP_DANCE_DOUBLE(FI_EQL, FI_AMPR),
+    [TD_LPRN_RPRN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
+    [TD_LCBR_RCBR] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
+    [TD_LBRC_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
+    [TD_PLUS_MIN]  = ACTION_TAP_DANCE_DOUBLE(KC_PLUS, KC_MINS),
+    [TD_DIV_MULT]  = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_ASTR),
+    [TD_Q_Z]       = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_Z),
+    [TD_EQL_AMPR]  = ACTION_TAP_DANCE_DOUBLE(KC_EQL, KC_AMPR),
 };
 
 // Add tap dance item to your keymap in place of a keycode
@@ -139,53 +155,53 @@ const uint32_t PROGMEM unicode_map[] = {
 };
 
 // Add key combos
-const uint16_t PROGMEM cmb_lprn[]  = {FI_W, FI_A, COMBO_END};
-const uint16_t PROGMEM cmb_rprn[]  = {FI_Y, FI_O, COMBO_END};
-const uint16_t PROGMEM cmb_lcbr[]  = {FI_A, FI_ADIA, COMBO_END};
-const uint16_t PROGMEM cmb_rcbr[]  = {FI_O, FI_DOT, COMBO_END};
-const uint16_t PROGMEM cmb_lbrc[]  = {FI_H, FI_L, COMBO_END};
-const uint16_t PROGMEM cmb_rbrc[]  = {FI_K, FI_T, COMBO_END};
-const uint16_t PROGMEM cmb_labk[]  = {FI_L, FI_D, COMBO_END};
-const uint16_t PROGMEM cmb_rabk[]  = {FI_T, FI_J, COMBO_END};
-const uint16_t PROGMEM cmb_bksp1[] = {FI_U, FI_Y, FI_B, COMBO_END};
-const uint16_t PROGMEM cmb_del1[]  = {FI_W, FI_U, FI_Y, COMBO_END};
-const uint16_t PROGMEM cmb_ent1[]  = {FI_A,FI_I, FI_O, COMBO_END};
-const uint16_t PROGMEM cmb_fwsl[]  = {FI_U, FI_I, COMBO_END};
-const uint16_t PROGMEM cmb_bksl[]  = {FI_R, FI_N, COMBO_END};
-const uint16_t PROGMEM cmb_star[]  = {FI_I, FI_COMM, COMBO_END};
+const uint16_t PROGMEM cmb_lprn[]  = {KC_W, KC_A, COMBO_END};
+const uint16_t PROGMEM cmb_rprn[]  = {KC_Y, KC_O, COMBO_END};
+const uint16_t PROGMEM cmb_lcbr[]  = {KC_A, FI_ADIA, COMBO_END};
+const uint16_t PROGMEM cmb_rcbr[]  = {KC_O, KC_DOT, COMBO_END};
+const uint16_t PROGMEM cmb_lbrc[]  = {KC_H, KC_L, COMBO_END};
+const uint16_t PROGMEM cmb_rbrc[]  = {KC_K, KC_T, COMBO_END};
+const uint16_t PROGMEM cmb_labk[]  = {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM cmb_rabk[]  = {KC_T, KC_J, COMBO_END};
+const uint16_t PROGMEM cmb_bksp1[] = {KC_U, KC_Y, KC_B, COMBO_END};
+const uint16_t PROGMEM cmb_del1[]  = {KC_W, KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM cmb_ent1[]  = {KC_A,KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM cmb_fwsl[]  = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM cmb_bksl[]  = {KC_R, KC_N, COMBO_END};
+const uint16_t PROGMEM cmb_star[]  = {KC_I, KC_COMM, COMBO_END};
 
 // Blender-specific combos
-const uint16_t PROGMEM cmb_grbnx[]  = {B_GRB, FI_X, COMBO_END};
-const uint16_t PROGMEM cmb_rotnx[]  = {B_ROT, FI_X, COMBO_END};
-const uint16_t PROGMEM cmb_sclnx[]  = {B_SCL, FI_X, COMBO_END};
+const uint16_t PROGMEM cmb_grbnx[]  = {B_GRB, KC_X, COMBO_END};
+const uint16_t PROGMEM cmb_rotnx[]  = {B_ROT, KC_X, COMBO_END};
+const uint16_t PROGMEM cmb_sclnx[]  = {B_SCL, KC_X, COMBO_END};
 
-const uint16_t PROGMEM cmb_grbny[]  = {B_GRB, FI_Y, COMBO_END};
-const uint16_t PROGMEM cmb_rotny[]  = {B_ROT, FI_Y, COMBO_END};
-const uint16_t PROGMEM cmb_sclny[]  = {B_SCL, FI_Y, COMBO_END};
+const uint16_t PROGMEM cmb_grbny[]  = {B_GRB, KC_Y, COMBO_END};
+const uint16_t PROGMEM cmb_rotny[]  = {B_ROT, KC_Y, COMBO_END};
+const uint16_t PROGMEM cmb_sclny[]  = {B_SCL, KC_Y, COMBO_END};
 
-const uint16_t PROGMEM cmb_grbnz[]  = {B_GRB, FI_Z, COMBO_END};
-const uint16_t PROGMEM cmb_rotnz[]  = {B_ROT, FI_Z, COMBO_END};
-const uint16_t PROGMEM cmb_sclnz[]  = {B_SCL, FI_Z, COMBO_END};
+const uint16_t PROGMEM cmb_grbnz[]  = {B_GRB, KC_Z, COMBO_END};
+const uint16_t PROGMEM cmb_rotnz[]  = {B_ROT, KC_Z, COMBO_END};
+const uint16_t PROGMEM cmb_sclnz[]  = {B_SCL, KC_Z, COMBO_END};
 
 const uint16_t PROGMEM cmb_pie_editor[]  = {B_ADD, B_P_MOD, COMBO_END};
 
-//const uint16_t PROGMEM cmb_ent2[]  = {FI_R, FI_H, FI_P, COMBO_END};
+//const uint16_t PROGMEM cmb_ent2[]  = {KC_R, KC_H, KC_P, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(cmb_lprn,  FI_LPRN),
-    COMBO(cmb_rprn,  FI_RPRN),
-    COMBO(cmb_lcbr,  FI_LCBR),
-    COMBO(cmb_rcbr,  FI_RCBR),
-    COMBO(cmb_lbrc,  FI_LBRC),
-    COMBO(cmb_rbrc,  FI_RBRC),
-    COMBO(cmb_labk,  FI_LABK),
-    COMBO(cmb_rabk,  FI_RABK),
+    COMBO(cmb_lprn,  S(KC_9)),
+    COMBO(cmb_rprn,  S(KC_0)),
+    COMBO(cmb_lcbr,  S(KC_LBRC)),
+    COMBO(cmb_rcbr,  S(KC_RBRC)),
+    COMBO(cmb_lbrc,  KC_LBRC),
+    COMBO(cmb_rbrc,  KC_RBRC),
+    COMBO(cmb_labk,  S(KC_COMM)),
+    COMBO(cmb_rabk,  S(KC_DOT)),
     COMBO(cmb_bksp1, KC_BSPC),
     COMBO(cmb_del1,  KC_DEL),
     COMBO(cmb_ent1,  KENT),
-    COMBO(cmb_fwsl,  FI_SLSH),
-    COMBO(cmb_bksl,  FI_BSLS),
-    COMBO(cmb_star,  FI_ASTR),
+    COMBO(cmb_fwsl,  KC_SLSH),
+    COMBO(cmb_bksl,  KC_BSLS),
+    COMBO(cmb_star,  KC_ASTR),
 
     // Blender combos
 
@@ -209,20 +225,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Base layer: DAS
      *
      * ,-------------------------------------------.                              ,-------------------------------------------.
-     * |RAIS/ESC|   P  |   H  |   R  |  K   |  <>  |                              |  '*  |  W   |  U   |  Y   |  B   |   QZ   |
+     * |RAIS/ESC|   P  |   H  |   R  |  K   |  <>  |                              |  '"  |  W   |  U   |  Y   |  B   |   Q    |
      * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
      * |   F    |  S   |   L  |   N  |  T   |  V   |                              |  G   |  A   |  I   |  O   |  E   |   C    |
      * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-     * | Ctrl/BS|  X   |   D  |   M  |  J   |  Å   |LShift|Leader|  |RShift|  ?   |  Ö   |  Ä   |  ,;  |  .:  |  -_  |   Z    |
+     * | Ctrl/BS|  X   |   D  |   M  |  J   |  \|  |LShift|Leader|  |RShift|  ?   |  Ö   |  Ä   |  ,;  |  .:  |  -_  |   Z    |
      * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
      *                        | GUI  | Enter| Alt  | Space| Esc  |  | Tab  | Space|      | LEAD | CAPS |
      *                        |      |      |      | Lower| Raise|  | Lower| Raise| RAlt |      |      |
      *                        `----------------------------------'  `----------------------------------'
      */
     [_DAS] = LAYOUT(
-        KC_ESC, FI_P, FI_H, FI_R, FI_K, KC_NUBS,                                       FI_QUOT, FI_W,    FI_U,    FI_Y,   FI_B,    TD(TD_Q_Z),
-        FI_F,   FI_S, FI_L, FI_N, FI_T, FI_V,                                          FI_G,    FI_A,    FI_I,    FI_O,   FI_E,    FI_C,
-        CT_BSP, FI_X, FI_D, FI_M, FI_J, FI_ARNG, KC_LSFT, QK_LEAD,   KC_RSFT, FI_QUES, FI_ODIA, FI_ADIA, FI_COMM, FI_DOT, FI_MINS, FI_Z,
+        KC_ESC, KC_P, KC_H, KC_R, KC_K, KC_NUBS,                                       ALGR(KC_QUOT), KC_W,    KC_U,    KC_Y,   KC_B,    KC_Q,
+        KC_F,   KC_S, KC_L, KC_N, KC_T, KC_V,                                          KC_G,    KC_A,    KC_I,    KC_O,   KC_E,    KC_C,
+        CT_BSP, KC_X, KC_D, KC_M, KC_J, KC_BSLS, KC_LSFT, QK_LEAD,   KC_RSFT, KC_QUES, FI_ODIA, FI_ADIA, KC_COMM, KC_DOT, KC_MINS, KC_Z,
                              KGUI, QK_LEAD, KC_LALT, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  KC_RALT, QK_LEAD, KC_CAPS
     ),
 
@@ -244,9 +260,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                        `----------------------------------'  `----------------------------------'
      */
     [_QWERTY] = LAYOUT(
-        HI_ESC,  FI_Q, FI_W, FI_E, FI_R, FI_T,                                         FI_Y,   FI_U, FI_I,    FI_O,   FI_P,    FI_ARNG,
-        KC_NUBS, FI_A, FI_S, FI_D, FI_F, FI_G,                                         FI_H,   FI_J, FI_K,    FI_L,   FI_ODIA, FI_ADIA,
-        CT_BSP,  FI_Z, FI_X, FI_C, FI_V, FI_B,   KC_LSFT, QK_LEAD,   KC_RSFT, FI_DIAE, FI_N,   FI_M, FI_COMM, FI_DOT, FI_MINS, FI_QUOT,
+        HI_ESC,  KC_Q, KC_W, KC_E, KC_R, KC_T,                                         KC_Y,   KC_U, KC_I,    KC_O,   KC_P,    FI_ARNG,
+        KC_NUBS, KC_A, KC_S, KC_D, KC_F, KC_G,                                         KC_H,   KC_J, KC_K,    KC_L,   FI_ODIA, FI_ADIA,
+        CT_BSP,  KC_Z, KC_X, KC_C, KC_V, KC_B,   KC_LSFT, QK_LEAD,   KC_RSFT, FI_DIAE, KC_N,   KC_M, KC_COMM, KC_DOT, KC_MINS, KC_QUOT,
                              KGUI, KENT, ALTDEL, LO_SPC,  HI_ESC,    LO_TAB,  HI_SPC,  RLTBSP, KENT, KC_LALT),
 
 
@@ -270,6 +286,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      XXXXXXX, STN_S2, STN_KL, STN_WL,  STN_RL,  STN_ST2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, STN_ST4, STN_RR,  STN_BR, STN_GR, STN_SR, STN_ZR,
                               XXXXXXX, XXXXXXX, STN_A,   STN_O,   _______, _______, STN_E,   STN_U,   XXXXXXX, XXXXXXX
    ),
+
 /*
 * Blender layer. Letft-hand centric setup for use with
 * drawing surface.
@@ -286,9 +303,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                        `----------------------------------'  `----------------------------------'
 */
    [_BLENDER] = LAYOUT(
-     XXXXXXX, XXXXXXX,    FI_Z,    FI_Y,    FI_X, B_P_MOD,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
+     XXXXXXX, XXXXXXX,    KC_Z,    KC_Y,    KC_X, B_P_MOD,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     DAS,
      XXXXXXX, XXXXXXX,   B_SCL,   B_ROT,   B_GRB,   B_ADD,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-     KC_LCTL, KC_LSFT, KC_LALT,   FI_T,    FI_N,  XXXXXXX,  B_REDO, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     KC_LCTL, KC_LSFT, KC_LALT,   KC_T,    KC_N,  XXXXXXX,  B_REDO, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                 XXXXXXX, XXXXXXX, XXXXXXX,  B_UNDO,  KC_ESC,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
    ),
 
@@ -306,10 +323,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAMER] = LAYOUT(
-         KC_1,  KC_TAB,    FI_Q,    FI_X,    FI_E,    FI_R,                                        FI_Y,    KC_7,    KC_8,    KC_9,   KC_F1,     DAS,
-         KC_2, KC_LSFT,    FI_A,    FI_W,    FI_D,    FI_F,                                     XXXXXXX,    KC_4,    KC_5,    KC_6,   KC_F2, XXXXXXX,
-         KC_3, KC_LCTL,    FI_Z,    FI_S,    FI_C,    FI_V,    FI_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX,    KC_1,    KC_2,    KC_3,   KC_F3,   KC_F4,
-                                 XXXXXXX, XXXXXXX,    FI_B,    KSPC,   FI_M, XXXXXXX, XXXXXXX,     KC_0, XXXXXXX, XXXXXXX
+         KC_1,  KC_TAB,    KC_Q,    KC_X,    KC_E,    KC_R,                                        KC_Y,    KC_7,    KC_8,    KC_9,   KC_F1,     DAS,
+         KC_2, KC_LSFT,    KC_A,    KC_W,    KC_D,    KC_F,                                     XXXXXXX,    KC_4,    KC_5,    KC_6,   KC_F2, XXXXXXX,
+         KC_3, KC_LCTL,    KC_Z,    KC_S,    KC_C,    KC_V,    KC_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX,    KC_1,    KC_2,    KC_3,   KC_F3,   KC_F4,
+                                 XXXXXXX, XXXXXXX,    KC_B,    KSPC,   KC_M, XXXXXXX, XXXXXXX,     KC_0, XXXXXXX, XXXXXXX
+    ),
+
+/*
+ * Beyond All Reason gaming layer
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |    1   |  TAB |   Q  |   X  |   E  |   R  |                              |   Y  |   7  |   8  |   9  |  F1  |   DAS  |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |    2   | SHFT |   A  |   W  |   D  |   F  |                              |      |   4  |   5  |   6  |  F2  |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |    3   | CTRL |   Z  |   S  |   C  |   V  |   T  |  ESC |  |      |      |      |   1  |   2  |   3  |  F3  |   F4   |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |   B  |  SPC |   M  |  |      |      |   0  |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_GAMER] = LAYOUT(
+         KC_1,  KC_TAB,    KC_Q,    KC_X,    KC_E,    KC_R,                                        KC_Y,    KC_7,    KC_8,    KC_9,   KC_F1,     DAS,
+         KC_2, KC_LSFT,    KC_A,    KC_W,    KC_D,    KC_F,                                     XXXXXXX,    KC_4,    KC_5,    KC_6,   KC_F2, XXXXXXX,
+         KC_3, KC_LCTL,    KC_Z,    KC_S,    KC_C,    KC_V,    KC_T,  KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX,    KC_1,    KC_2,    KC_3,   KC_F3,   KC_F4,
+                                 XXXXXXX, XXXXXXX,    KC_B,    KSPC,   KC_M, XXXXXXX, XXXXXXX,     KC_0, XXXXXXX, XXXXXXX
     ),
 
 /*
@@ -327,10 +364,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_LOWER] = LAYOUT(
-      FI_BSLS, FI_EXLM, FI_DQUO, FI_AT,   FI_EURO, FI_PERC,                                     TD(TD_LBRC_RBRC), KC_7, KC_8, KC_9, FI_PIPE,         FI_PND,
-      FI_SECT, FI_HASH, FI_DLR,  TD(TD_EQL_AMPR),  FI_DIAE, FI_GRV,                             TD(TD_LPRN_RPRN), KC_4, KC_5, KC_6, TD(TD_PLUS_MIN), TD(TD_DIV_MULT),
-      FI_MICR, FI_HALF, FI_CURR, UM(DEG),  FI_CIRC, FI_TILD, _______, _______, _______, KC_LALT, TD(TD_LCBR_RCBR), KC_1, KC_2, KC_3, FI_QUES,         UM(PI),
-                                 _______, _______, _______, FI_SCLN, FI_QUES, FI_SCLN, _______, KC_0, KBSP, _______
+      KC_BSLS, KC_EXLM,    FI_DQUO, S(KC_2),          ALGR(KC_5), KC_PERC,                              TD(TD_LBRC_RBRC), KC_7, KC_8, KC_9, S(KC_BSLS),      S(ALGR(KC_4)),
+      FI_SECT, S(KC_3),    S(KC_4), TD(TD_EQL_AMPR),  FI_DIAE,    KC_GRV,                               TD(TD_LPRN_RPRN), KC_4, KC_5, KC_6, TD(TD_PLUS_MIN), TD(TD_DIV_MULT),
+      FI_MICR, ALGR(KC_7), FI_CURR, UM(DEG), KC_CIRC, S(KC_GRV), _______, KC_QUOT,    _______, KC_LALT, TD(TD_LCBR_RCBR), KC_1, KC_2, KC_3, KC_QUES,         UM(PI),
+                                    _______, _______, _______, KC_SCLN, KC_QUES,      KC_SCLN, _______, KC_0,             KBSP, _______
     ),
 /*
  * Raise Layer: Number keys, media, navigation
@@ -362,14 +399,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |UC_LINX |      |      | BLND | RHNO | GAME |      |      |  |      |      | MWdn | LMB  | MDn  | RMB  |      | QK_BOOT|
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      | MMB  |
+ *                        |      |QK_RBT|      |      |      |  |      |      |      | MMB  |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
       UC_WINC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,    KC_F8,   KC_F9,  KC_F10,  KC_F11,
       UC_MAC,  _______, _______, DAS  ,    PLVR,    QWRT,                                     KC_WH_U, KC_MS_L,  KC_MS_U, KC_MS_R, _______,  KC_F12,
       UC_LINX, _______, _______, BLND ,    RHNO,    GAME, _______, _______, _______, _______, KC_WH_D, KC_BTN1,  KC_MS_D, KC_BTN2, _______, QK_BOOT,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, KC_BTN3,  _______
+                                 _______, QK_RBT, _______, _______, _______, _______, _______, _______, KC_BTN3,  _______
     ),
 // /*
 //  * Layer template
@@ -420,7 +457,18 @@ static uint8_t get_send_delay(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
     bool is_mac = get_unicode_input_mode() == UNICODE_MODE_MACOS;
-    bool is_linx = get_unicode_input_mode() == UNICODE_MODE_LINUX;
+    //bool is_linx = get_unicode_input_mode() == UNICODE_MODE_LINUX;
+    static bool lshift = false;
+    static bool rshift = false;
+    static bool shift  = false;
+
+    if(keycode == KC_LSFT) {
+        lshift = record->event.pressed;
+    } else if(keycode == KC_RSFT) {
+        rshift = record->event.pressed;
+    }
+
+    shift = lshift || rshift;
 
 #ifdef CONSOLE_ENABLE
     dprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
@@ -462,7 +510,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case B_ADD:
         if(record->event.pressed)
         {
-            tap_code16(LSFT(FI_A));
+            tap_code16(LSFT(KC_A));
             //SEND_STRING("Pie Edit");
         }
         return false;
@@ -471,11 +519,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         {
             if(is_mac)
             {
-                tap_code16(LCMD(FI_Z));
+                tap_code16(LCMD(KC_Z));
             }
             else
             {
-                tap_code16(LCTL(FI_Z));
+                tap_code16(LCTL(KC_Z));
             }
         }
         return false;
@@ -484,18 +532,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         {
             if(is_mac)
             {
-                tap_code16(SCMD(FI_Z));
+                tap_code16(SCMD(KC_Z));
             }
             else
             {
-                tap_code16(LCS(FI_Z));
+                tap_code16(LCS(KC_Z));
             }
         }
         return false;
     case B_P_EDIT:
         if(record->event.pressed)
         {
-            tap_code16(LCA(FI_S));
+            tap_code16(LCA(KC_S));
             //SEND_STRING("Pie Edit");
         }
         return false;
@@ -509,144 +557,144 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case B_GRB:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
+            tap_code16(KC_G);
         }
         return false;
     case B_GRB_X:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
-            tap_code16(FI_X);
+            tap_code16(KC_G);
+            tap_code16(KC_X);
         }
         return false;
     case B_GRB_XX:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
-            tap_code16(FI_X);
-            tap_code16(FI_X);
+            tap_code16(KC_G);
+            tap_code16(KC_X);
+            tap_code16(KC_X);
         }
         return false;
     case B_GRB_NX:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
-            tap_code16(LSFT(FI_X));
+            tap_code16(KC_G);
+            tap_code16(LSFT(KC_X));
         }
         return false;
     case B_GRB_NY:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
-            tap_code16(LSFT(FI_Y));
+            tap_code16(KC_G);
+            tap_code16(LSFT(KC_Y));
         }
         return false;
     case B_GRB_NZ:
         if(record->event.pressed)
         {
-            tap_code16(FI_G);
-            tap_code16(LSFT(FI_Z));
+            tap_code16(KC_G);
+            tap_code16(LSFT(KC_Z));
         }
         return false;
     case B_ROT:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
+            tap_code16(KC_R);
         }
         return false;
     case B_ROT_X:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
-            tap_code16(FI_X);
+            tap_code16(KC_R);
+            tap_code16(KC_X);
         }
         return false;
     case B_ROT_XX:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
-            tap_code16(FI_X);
-            tap_code16(FI_X);
+            tap_code16(KC_R);
+            tap_code16(KC_X);
+            tap_code16(KC_X);
         }
         return false;
     case B_ROT_NX:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
-            tap_code16(LSFT(FI_X));
+            tap_code16(KC_R);
+            tap_code16(LSFT(KC_X));
         }
         return false;
     case B_ROT_NY:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
-            tap_code16(LSFT(FI_Y));
+            tap_code16(KC_R);
+            tap_code16(LSFT(KC_Y));
         }
         return false;
     case B_ROT_NZ:
         if(record->event.pressed)
         {
-            tap_code16(FI_R);
-            tap_code16(LSFT(FI_Z));
+            tap_code16(KC_R);
+            tap_code16(LSFT(KC_Z));
         }
         return false;
     case B_SCL:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
+            tap_code16(KC_S);
         }
         return false;
     case B_SCL_X:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
-            tap_code16(FI_X);
+            tap_code16(KC_S);
+            tap_code16(KC_X);
         }
         return false;
     case B_SCL_XX:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
-            tap_code16(FI_X);
-            tap_code16(FI_X);
+            tap_code16(KC_S);
+            tap_code16(KC_X);
+            tap_code16(KC_X);
         }
         return false;
     case B_SCL_NX:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
-            tap_code16(LSFT(FI_X));
+            tap_code16(KC_S);
+            tap_code16(LSFT(KC_X));
         }
         return false;
     case B_SCL_NY:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
-            tap_code16(LSFT(FI_Y));
+            tap_code16(KC_S);
+            tap_code16(LSFT(KC_Y));
         }
         return false;
     case B_SCL_NZ:
         if(record->event.pressed)
         {
-            tap_code16(FI_S);
-            tap_code16(LSFT(FI_Z));
+            tap_code16(KC_S);
+            tap_code16(LSFT(KC_Z));
         }
         return false;
-    case FI_LBRC:
+    case KC_LBRC:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(FI_8));
+            tap_code16(RALT(KC_8));
             return false;
         }
         return true;
-    case FI_RBRC:
+    case KC_RBRC:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(FI_9));
+            tap_code16(RALT(KC_9));
             return false;
         }
         return true;
-    case FI_LCBR:
+    case KC_LCBR:
         if(record->event.pressed && is_mac)
         {
             //dprintf("hit LCBR on mac\n");
@@ -654,7 +702,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
             return false;
         }
         return true;
-    case FI_RCBR:
+    case KC_RCBR:
         if(record->event.pressed && is_mac)
         {
             //dprintf("hit RCBR on mac\n");
@@ -662,29 +710,54 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
             return false;
         }
         return true;
-    case FI_BSLS:
+    case KC_BSLS:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(S(FI_7)));
+            tap_code16(RALT(S(KC_7)));
             return false;
         }
         return true;
-    case FI_PIPE:
+    case KC_PIPE:
         if(record->event.pressed && is_mac)
         {
-            tap_code16(RALT(FI_7));
+            tap_code16(RALT(KC_7));
             return false;
         }
         return true;
-    case FI_EURO:
-        if(record->event.pressed && is_mac)
+    case KC_DOT:
+        if(record->event.pressed && shift)
         {
-            tap_code16(S(FI_4));
+            dprintf("\t shift kc_dot\n");
+            tap_code16(S(KC_SCLN));
             return false;
         }
-        if(record->event.pressed && is_linx)
+        return true;
+    case KC_COMM:
+        if(record->event.pressed && shift)
         {
-            tap_code16(RALT(FI_E));
+            dprintf("\t shift kc_comm\n");
+            clear_mods();
+            tap_code16(KC_SCLN);
+            return false;
+        }
+        if(!record->event.pressed)
+        {
+            return false;
+        }
+        return true;
+    case S(KC_5):
+        if(record->event.pressed && is_mac)
+        {
+            tap_code16(S(KC_4));
+            return false;
+        }
+        return true;
+    case KC_NUBS:
+        if(record->event.pressed)
+        {
+            uint16_t _kc = shift ? KC_DOT
+                                 : KC_COMM;
+                tap_code16(S(_kc));
             return false;
         }
         return true;
@@ -700,109 +773,100 @@ void matrix_init_user(void) {
 
 void leader_end_user(void) {
     uint8_t delay = get_send_delay();
-    if (leader_sequence_one_key(FI_C)) { // Inline Code
-        tap_code16(FI_GRV);
+    if (leader_sequence_one_key(KC_C)) { // Inline Code
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
     }
-    if (leader_sequence_two_keys(FI_C, FI_C)) { // Inline Code begin and end code fence, up and space
-        tap_code16(FI_GRV);
+    if (leader_sequence_two_keys(KC_C, KC_C)) { // Inline Code begin and end code fence, up and space
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
 
         tap_code16(KC_ENT);
 
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
-        tap_code16(FI_GRV);
+        tap_code16(KC_GRV);
         tap_code16(KC_SPC);
 
         tap_code16(KC_UP);
+        tap_code16(KC_END);
         tap_code16(KC_SPC);
     }
-    if(leader_sequence_one_key(FI_S)) { // Windows screenshot
+    if(leader_sequence_one_key(KC_S)) { // Windows screenshot
         SEND_STRING(SS_LGUI("\nS"));
     }
-    if(leader_sequence_one_key(FI_W)) { // Save: ctrl+s
+    if(leader_sequence_one_key(KC_W)) { // Save: ctrl+s
         tap_code16(LCTL(KC_S));
     }
-    if(leader_sequence_one_key(FI_R)) { // Initiate recursive search cli: ctrl+r
+    if(leader_sequence_one_key(KC_R)) { // Initiate recursive search cli: ctrl+r
         tap_code16(LCTL(KC_R));
     }
     // Rhino commands
-    if(leader_sequence_three_keys(FI_R, FI_M, FI_C)) {
+    if(leader_sequence_three_keys(KC_R, KC_M, KC_C)) {
         SEND_STRING("TestMooCow\n");
     }
-    if(leader_sequence_three_keys(FI_R, FI_S, FI_I)) {
-        SEND_STRING(SS_LSFT("/") "SystemInfo\n");
+    if(leader_sequence_three_keys(KC_R, KC_S, KC_I)) {
+        SEND_STRING("_SystemInfo\n");
     }
-    if(leader_sequence_three_keys(FI_R, FI_R, FI_A)) {
-        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Raytraced\n", delay);
+    if(leader_sequence_three_keys(KC_R, KC_R, KC_A)) {
+        SEND_STRING_DELAY("_SetDisplayMode _M _Raytraced\n", delay);
     }
-    if(leader_sequence_three_keys(FI_R, FI_R, FI_E)) {
-        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/")"Rendered\n", delay);
+    if(leader_sequence_three_keys(KC_R, KC_R, KC_E)) {
+        SEND_STRING_DELAY("_SetDisplayMode _M _Rendered\n", delay);
     }
-    if(leader_sequence_three_keys(FI_R, FI_D, FI_M)) {
-        SEND_STRING_DELAY("/" SS_LSFT("/") "SetDisplayMode " SS_LSFT("/") "M " SS_LSFT("/"), delay);
+    if(leader_sequence_three_keys(KC_R, KC_D, KC_M)) {
+        SEND_STRING_DELAY("_SetDisplayMode _M _", delay);
     }
-    if(leader_sequence_three_keys(FI_R, FI_A, FI_U)) {
-        SEND_STRING(SS_LSFT("/") "Audit3dmFile\n");
+    if(leader_sequence_three_keys(KC_R, KC_A, KC_U)) {
+        SEND_STRING("_Audit3dmFile\n");
     }
 
     // Git key combos
-    if(leader_sequence_two_keys(FI_G, FI_D)) {
+    if(leader_sequence_two_keys(KC_G, KC_D)) {
         SEND_STRING("git diff\n");
     }
-    if(leader_sequence_three_keys(FI_G, FI_D, FI_H)) {
-        SEND_STRING("git diff HEAD" SS_RALT("]") " 1\n");
+    if(leader_sequence_three_keys(KC_G, KC_D, KC_H)) {
+        SEND_STRING("git diff HEAD~ 1\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_F)) {
+    if(leader_sequence_two_keys(KC_G, KC_F)) {
         SEND_STRING("git fetch\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_S)) {
+    if(leader_sequence_two_keys(KC_G, KC_S)) {
         SEND_STRING("git status\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_G)) {
+    if(leader_sequence_two_keys(KC_G, KC_G)) {
         SEND_STRING("git gui\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_K)) {
+    if(leader_sequence_two_keys(KC_G, KC_K)) {
         SEND_STRING("gitk\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_L)) {
+    if(leader_sequence_two_keys(KC_G, KC_L)) {
         SEND_STRING("git log\n");
     }
-    if(leader_sequence_two_keys(FI_G, FI_P)) {
-        SEND_STRING("git pull //ff/only\n");
+    if(leader_sequence_two_keys(KC_G, KC_P)) {
+        SEND_STRING("git pull --ff-only\n");
     }
-    if(leader_sequence_three_keys(FI_G, FI_S, FI_U)) {
-        SEND_STRING("git submodule update //init //recursive\n");
+    if(leader_sequence_three_keys(KC_G, KC_S, KC_U)) {
+        SEND_STRING("git submodule update --init --recursive\n");
     }
     // Rhino discourse keycombos
-    if(leader_sequence_four_keys(FI_D, FI_R, FI_S, FI_I)) {
-        SEND_STRING("Please run the Rhino command ");
-        tap_code16(FI_GRV);
-        tap_code16(FI_UNDS);
-        SEND_STRING("SystemInfo");
-        tap_code16(FI_GRV);
-        tap_code16(KC_SPC);
-        SEND_STRING(" and post the result in a reply.");
+    if(leader_sequence_four_keys(KC_D, KC_R, KC_S, KC_I)) {
+        SEND_STRING("Please run the Rhino command ` _SystemInfo`  and post the result in a reply.");
     }
     // QMK commands, using K for keyboard instead of Q of QMK
     // because Q is already a tapdance participant.
-    if(leader_sequence_two_keys(FI_K, FI_C)) {
-        SEND_STRING("qmk compile /kb splitkb");
-        tap_code16(FI_SLSH);
-        SEND_STRING("kyria");
-        tap_code16(FI_SLSH);
-        SEND_STRING("rev3 /km jesterKing\n");
+    if(leader_sequence_two_keys(KC_K, KC_C)) {
+        SEND_STRING("qmk compile -kb splitkb/kyria/rev3 -km jesterKing\n");
     }
 }
 
