@@ -24,6 +24,7 @@
  */
 
 #include "keymap_finnish.h"
+#include "print.h"
 
 #define LCS(kc) (QK_LCTL | QK_LSFT | (kc))
 
@@ -423,7 +424,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 
 #ifdef CONSOLE_ENABLE
     dprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
-    dprintf("\t0x%04X 0x%04X\n", FI_LCBR, FI_RCBR);
+    uprintf("\t -> %s\n", get_keycode_string(keycode));
 #endif
 
     switch (keycode)
@@ -964,11 +965,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_VOLD);
             }
         } else if(layer==_LOWER || layer==_RAISE) {
+#if RGB_MATRIX_ENABLE
             if (clockwise) {
                 rgblight_increase_val_noeeprom();
             } else {
                 rgblight_decrease_val_noeeprom();
             }
+#endif //RGB_MATRIX_ENABLE
         }
     }
     else if (index == 1) {
@@ -980,6 +983,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_PGDN);
             }
         } else if(layer==_LOWER) {
+#if RGB_MATRIX_ENABLE
             uint8_t speed = rgblight_get_speed();
             if (clockwise) {
                 speed+=10;
@@ -989,12 +993,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 speed = speed < 30 ? 30 : speed;
             }
             rgblight_set_speed(speed);
+#endif // RGB_MATRIX_ENABLE
         } else if(layer==_RAISE) {
+#if RGB_MATRIX_ENABLE
             if (clockwise) {
                 rgblight_enable_noeeprom();
             } else {
                 rgblight_disable_noeeprom();
             }
+#endif //RGB_MATRIX_ENABLE
         }
     }
     return true;
@@ -1002,12 +1009,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 void keyboard_post_init_user(void) {
     //rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
+#if RGB_MATRIX_ENABLE
     rgblight_set_speed(80);
     while(rgblight_get_val() > 72)
     {
         rgblight_decrease_val();
     }
     rgb_matrix_set_speed(40);
+#endif //RGB_MATRIX_ENABLE
     // rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
     // rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
 #ifdef CONSOLE_ENABLE
@@ -1018,9 +1027,9 @@ void keyboard_post_init_user(void) {
 }
 
 void suspend_power_down_user(void) {
-    rgblight_suspend();
+    //rgblight_suspend();
 }
 
 void suspend_wakeup_init_user(void) {
-    rgblight_wakeup();
+    //rgblight_wakeup();
 }
