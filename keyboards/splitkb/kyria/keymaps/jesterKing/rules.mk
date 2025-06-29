@@ -6,7 +6,7 @@ TAP_DANCE_ENABLE      = yes      # Enable tap dance
 MOUSEKEY_ENABLE       = yes      # Enable mouse keys
 EXTRAKEY_ENABLE   =     yes      # Enable audio and system control keys
 COMBO_ENABLE          = yes      # Enable combos
-CONSOLE_ENABLE        = yes      # Enable debug printing, use in concert with hid-listen
+CONSOLE_ENABLE        = no       # Enable debug printing, use in concert with hid-listen
 KEYCODE_STRING_ENABLE = yes      # Enable readable logging> get_keycode_string(kc)
 RGB_MATRIX_ENABLE     = no       # Disable keyboard RGB matrix, as it is enabled by default on rev3
 
