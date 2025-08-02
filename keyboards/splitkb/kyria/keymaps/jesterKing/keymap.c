@@ -471,7 +471,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     shift = lshift || rshift;
 
 #ifdef CONSOLE_ENABLE
-    dprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+    dprintf("KL: kc: 0x%04X, col: %2u, ", keycode, record->event.key.col);
+    dprintf("row: %2u, pressed: %u, ",    record->event.key.row, record->event.pressed);
+    dprintf("time: %5u, int: %u, ",       record->event.time, record->tap.interrupted);
+    dprintf("count: %u\n",                record->tap.count);
     uprintf("\t -> %s\n", get_keycode_string(keycode));
 #endif
 
@@ -738,10 +741,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
             dprintf("\t shift kc_comm\n");
             clear_mods();
             tap_code16(KC_SCLN);
-            return false;
-        }
-        if(!record->event.pressed)
-        {
             return false;
         }
         return true;
@@ -1072,7 +1071,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 void keyboard_post_init_user(void) {
-    //rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
+    rgblight_enable_noeeprom();                          // enables Rgb, without saving settings
 #if RGB_MATRIX_ENABLE
     rgblight_set_speed(80);
     while(rgblight_get_val() > 72)
@@ -1081,19 +1080,19 @@ void keyboard_post_init_user(void) {
     }
     rgb_matrix_set_speed(40);
 #endif //RGB_MATRIX_ENABLE
-    // rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
-    // rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
+    rgblight_sethsv_noeeprom(255, 128, 64);             // sets the color to teal/cyan without saving
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
 #ifdef CONSOLE_ENABLE
-        debug_enable = true;
-    debug_matrix = false;
+    debug_enable = true;
+    debug_matrix = true;
     debug_keyboard = true;
 #endif
 }
 
 void suspend_power_down_user(void) {
-    //rgblight_suspend();
+    rgblight_suspend();
 }
 
 void suspend_wakeup_init_user(void) {
-    //rgblight_wakeup();
+    rgblight_wakeup();
 }
